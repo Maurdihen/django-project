@@ -3,58 +3,102 @@
     "model": "catalog.category",
     "pk": 1,
     "fields": {
-      "name": "1",
-      "description": "1"
+      "name": "Электроника",
+      "description": "Электронные устройства и гаджеты"
     }
   },
   {
     "model": "catalog.category",
     "pk": 2,
     "fields": {
-      "name": "2",
-      "description": "2"
+      "name": "Книги",
+      "description": "Художественная и научная литература"
     }
   },
   {
     "model": "catalog.category",
     "pk": 3,
     "fields": {
-      "name": "name",
-      "description": "description"
-    }
-  },
-  {
-    "model": "catalog.category",
-    "pk": 4,
-    "fields": {
-      "name": "name1",
-      "description": "description1"
+      "name": "Спорт",
+      "description": "Спортивный инвентарь и одежда"
     }
   },
   {
     "model": "catalog.product",
-    "pk": 3,
+    "pk": 1,
     "fields": {
-      "name": "1",
-      "description": "1",
+      "name": "Смартфон Galaxy S23",
+      "description": "Мощный смартфон с отличной камерой и производительностью. Экран 6.1\", RAM 8GB, Storage 256GB",
       "image": "",
       "category": 1,
-      "unit_price": 1,
-      "data_created": null,
-      "data_changed": null
+      "unit_price": 79999,
+      "data_created": "2024-04-03",
+      "data_changed": "2024-04-03"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 2,
+    "fields": {
+      "name": "Ноутбук MacBook Air",
+      "description": "Легкий и мощный ноутбук для работы и учебы. M2 chip, 8GB RAM, 256GB SSD",
+      "image": "",
+      "category": 1,
+      "unit_price": 99999,
+      "data_created": "2024-04-03",
+      "data_changed": "2024-04-03"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 3,
+    "fields": {
+      "name": "1984",
+      "description": "Культовый роман-антиутопия Джорджа Оруэлла",
+      "image": "",
+      "category": 2,
+      "unit_price": 599,
+      "data_created": "2024-04-03",
+      "data_changed": "2024-04-03"
     }
   },
   {
     "model": "catalog.product",
     "pk": 4,
     "fields": {
-      "name": "2",
-      "description": "2",
+      "name": "Мастер и Маргарита",
+      "description": "Знаменитый роман Михаила Булгакова",
       "image": "",
       "category": 2,
-      "unit_price": 2,
-      "data_created": null,
-      "data_changed": null
+      "unit_price": 799,
+      "data_created": "2024-04-03",
+      "data_changed": "2024-04-03"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 5,
+    "fields": {
+      "name": "Коврик для йоги",
+      "description": "Удобный коврик для занятий йогой и фитнесом",
+      "image": "",
+      "category": 3,
+      "unit_price": 1999,
+      "data_created": "2024-04-03",
+      "data_changed": "2024-04-03"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 6,
+    "fields": {
+      "name": "Гантели 5кг",
+      "description": "Пара гантелей для домашних тренировок",
+      "image": "",
+      "category": 3,
+      "unit_price": 2499,
+      "data_created": "2024-04-03",
+      "data_changed": "2024-04-03"
     }
   }
 ]
