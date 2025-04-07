@@ -1,18 +1,28 @@
 import os
 from pathlib import Path
+from dotenv import load_dotenv
+
+load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+SECRET_KEY = os.getenv('SECRET_KEY')
 
-SECRET_KEY = "django-insecure-^hd)5jy842s%l96m4nr^no0--ymr5i0pgjfbs^v#7ayr4j9rmx"
-
-DEBUG = True
+DEBUG = os.getenv('DEBUG', 'True') == 'True'
 
 ALLOWED_HOSTS = []
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.redis.RedisCache',
+        'LOCATION': os.getenv('REDIS_LOCATION', 'redis://127.0.0.1:6379'),
+    }
+}
+
+CACHE_ENABLED = os.getenv('CACHE_ENABLED', 'True') == 'True'
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -56,8 +66,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "config.wsgi.application"
 
-
-
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
@@ -80,7 +88,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 LANGUAGE_CODE = "ru-ru"
 
 TIME_ZONE = "UTC"
@@ -89,10 +96,7 @@ USE_I18N = True
 
 USE_TZ = True
 
-
 STATIC_URL = "/static/"
-
-# Default primary key field type
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 

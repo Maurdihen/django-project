@@ -5,6 +5,7 @@ from django.utils.text import slugify
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .models import Product, BlogPost, Version
 from .forms import ProductForm, VersionForm
+from .services import get_categories
 
 
 class ProductListView(ListView):
@@ -20,6 +21,7 @@ class ProductListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['categories'] = get_categories()
         for product in context['products']:
             product.active_version = Version.objects.filter(
                 product=product, 
