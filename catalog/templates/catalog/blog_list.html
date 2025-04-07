@@ -1,0 +1,39 @@
+{% extends "catalog/base.html" %}
+
+{% block title %}Блог{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1>Блог</h1>
+        <a href="{% url 'blog_create' %}" class="btn btn-primary">Создать статью</a>
+    </div>
+
+    <div class="row row-cols-1 row-cols-md-2 g-4">
+        {% for post in posts %}
+        <div class="col">
+            <div class="card h-100">
+                {% if post.preview %}
+                    <img src="{{ post.preview.url }}" class="card-img-top" alt="{{ post.title }}">
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title">{{ post.title }}</h5>
+                    <p class="card-text">{{ post.content|truncatewords:30 }}</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <small class="text-muted">Просмотры: {{ post.views_count }}</small>
+                        <small class="text-muted">{{ post.created_at|date:"d.m.Y" }}</small>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <a href="{% url 'blog_detail' post.slug %}" class="btn btn-primary">Читать</a>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-12">
+            <p class="text-center">Нет опубликованных статей</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %} 
