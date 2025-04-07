@@ -1,0 +1,59 @@
+{% extends "catalog/base.html" %}
+{% load custom_filters %}
+
+{% block title %}Мои продукты{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1>Мои продукты</h1>
+        <div>
+            <a href="{% url 'product_create' %}" class="btn btn-primary">Создать продукт</a>
+            <a href="{% url 'version_create' %}" class="btn btn-outline-primary">Добавить версию</a>
+        </div>
+    </div>
+
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        {% for product in products %}
+        <div class="col">
+            <div class="card h-100">
+                {% if product.image %}
+                    <img src="{{ product.image|mediapath }}" class="card-img-top" alt="{{ product.name }}">
+                {% else %}
+                    <div class="bg-secondary text-white p-5 text-center">Нет изображения</div>
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title">{{ product.name }}</h5>
+                    <p class="card-text">{{ product.description|truncatechars:100 }}</p>
+                    <p class="card-text"><small class="text-muted">Категория: {{ product.category.name }}</small></p>
+                    {% if product.active_version %}
+                        <p class="card-text">
+                            <small class="text-success">
+                                Текущая версия: {{ product.active_version.version_name }} ({{ product.active_version.version_number }})
+                            </small>
+                        </p>
+                    {% endif %}
+                    <p class="card-text"><strong>{{ product.unit_price }} ₽</strong></p>
+                    <p class="card-text">
+                        <small class="{% if product.is_published %}text-success{% else %}text-danger{% endif %}">
+                            Статус: {% if product.is_published %}Опубликован{% else %}Не опубликован{% endif %}
+                        </small>
+                    </p>
+                </div>
+                <div class="card-footer">
+                    <div class="btn-group w-100">
+                        <a href="{% url 'product_detail' product.pk %}" class="btn btn-primary">Подробнее</a>
+                        <a href="{% url 'product_update' product.pk %}" class="btn btn-outline-primary">Изменить</a>
+                        <a href="{% url 'product_delete' product.pk %}" class="btn btn-outline-danger">Удалить</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-12">
+            <p class="text-center">У вас пока нет продуктов</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %} 

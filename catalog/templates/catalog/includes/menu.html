@@ -12,6 +12,11 @@
                 <li class="nav-item">
                     <a class="nav-link {% if '/blog/' in request.path %}active{% endif %}" href="{% url 'blog_list' %}">Блог</a>
                 </li>
+                {% if user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link {% if '/my-products/' in request.path %}active{% endif %}" href="{% url 'my_products' %}">Мои продукты</a>
+                </li>
+                {% endif %}
             </ul>
             <ul class="navbar-nav">
                 {% if user.is_authenticated %}

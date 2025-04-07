@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from django.contrib.auth import get_user_model
 
 NULLABLE = {"null": True, "blank": True}
 
@@ -25,7 +26,8 @@ class Product(models.Model):
     unit_price = models.IntegerField(verbose_name="цена за штуку")
     data_created = models.DateField(**NULLABLE, verbose_name="дата создания")
     data_changed = models.DateField(**NULLABLE, verbose_name="дата последнего изменения")
-
+    owner = models.ForeignKey(get_user_model(), on_delete=models.SET_NULL, **NULLABLE, verbose_name="владелец")
+    is_published = models.BooleanField(default=False, verbose_name="опубликовано")
 
     def __str__(self):
         return f"{self.name}"
@@ -33,6 +35,11 @@ class Product(models.Model):
     class Meta:
         verbose_name = "продукт"
         verbose_name_plural = "продукты"
+        permissions = [
+            ("can_unpublish_product", "Can unpublish product"),
+            ("can_edit_description", "Can edit product description"),
+            ("can_change_category", "Can change product category"),
+        ]
 
 
 class BlogPost(models.Model):

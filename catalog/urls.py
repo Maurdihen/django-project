@@ -3,11 +3,13 @@ from .views import (
     ProductListView, ProductDetailView, ProductCreateView,
     ProductUpdateView, ProductDeleteView, BlogListView,
     BlogDetailView, BlogCreateView, BlogUpdateView,
-    BlogDeleteView, VersionCreateView, VersionUpdateView
+    BlogDeleteView, VersionCreateView, VersionUpdateView,
+    MyProductsListView
 )
 
 urlpatterns = [
     path("", ProductListView.as_view(), name="index"),
+    path("my-products/", MyProductsListView.as_view(), name="my_products"),
     path("product/<int:pk>/", ProductDetailView.as_view(), name="product_detail"),
     path("product/create/", ProductCreateView.as_view(), name="product_create"),
     path("product/<int:pk>/update/", ProductUpdateView.as_view(), name="product_update"),
@@ -16,7 +18,6 @@ urlpatterns = [
     path("version/create/", VersionCreateView.as_view(), name="version_create"),
     path("version/<int:pk>/update/", VersionUpdateView.as_view(), name="version_update"),
     
-    # URLs для блога
     path("blog/", BlogListView.as_view(), name="blog_list"),
     path("blog/create/", BlogCreateView.as_view(), name="blog_create"),
     path("blog/<slug:slug>/", BlogDetailView.as_view(), name="blog_detail"),

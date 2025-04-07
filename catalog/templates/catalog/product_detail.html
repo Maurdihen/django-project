@@ -26,8 +26,20 @@
         <div class="mb-4">
             <p class="text-muted">Дата создания: {{ product.data_created|default:"Не указана" }}</p>
             <p class="text-muted">Последнее изменение: {{ product.data_changed|default:"Не указана" }}</p>
+            {% if product.owner %}
+                <p class="text-muted">Владелец: {{ product.owner.email }}</p>
+            {% endif %}
+            <p class="text-muted">Статус: {% if product.is_published %}Опубликован{% else %}Не опубликован{% endif %}</p>
         </div>
-        <a href="{% url 'index' %}" class="btn btn-outline-primary">Вернуться к списку</a>
+        <div class="btn-group">
+            <a href="{% url 'index' %}" class="btn btn-outline-primary">Вернуться к списку</a>
+            {% if user.is_authenticated and product.owner == user or perms.catalog.can_edit_description or perms.catalog.can_change_category %}
+                <a href="{% url 'product_update' product.pk %}" class="btn btn-primary">Изменить</a>
+            {% endif %}
+            {% if user.is_authenticated and product.owner == user %}
+                <a href="{% url 'product_delete' product.pk %}" class="btn btn-danger">Удалить</a>
+            {% endif %}
+        </div>
     </div>
 </div>
 {% endblock %} 
