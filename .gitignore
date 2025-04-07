@@ -27,18 +27,19 @@ db.sqlite3
 db.sqlite3-journal
 media/
 
-# IDE
-.idea/
-.vscode/
-*.swp
-*.swo
-
-# Environment
+# Virtual Environment
 .env
 .venv
 env/
 venv/
 ENV/
 
-# Other
-.DS_Store 
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db 
