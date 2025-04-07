@@ -5,13 +5,30 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
+            <ul class="navbar-nav me-auto">
                 <li class="nav-item">
                     <a class="nav-link {% if request.path == '/' %}active{% endif %}" href="{% url 'index' %}">Главная</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link {% if '/blog/' in request.path %}active{% endif %}" href="{% url 'blog_list' %}">Блог</a>
                 </li>
+            </ul>
+            <ul class="navbar-nav">
+                {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <span class="nav-link">{{ user.email }}</span>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'users:logout' %}">Выход</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link {% if '/users/login/' in request.path %}active{% endif %}" href="{% url 'users:login' %}">Вход</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if '/users/register/' in request.path %}active{% endif %}" href="{% url 'users:register' %}">Регистрация</a>
+                    </li>
+                {% endif %}
             </ul>
         </div>
     </div>
